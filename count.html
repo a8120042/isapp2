@@ -44,10 +44,9 @@
             var exNumber = objects[0].exNum;
             var now = inNumber - exNumber;
             document.getElementById("numbers").innerHTML = now + "人";
+            document.getElementById("record").innerHTML = inNumber;
         }
         setInterval(calculate, 2000);
-
-
     </script>
 </head>
 
@@ -60,7 +59,10 @@
         <button onclick="enter()"></buttn>入場</button>
         <button onclick="exit()">退場</button>
     </div>
-    <div></div>
+    <hr>
+    <div style="text-align: center;">
+        <p>合計来場者人数<span id="record"></span>人</p>
+    </div>
 </body>
 
 </html>
