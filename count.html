@@ -24,6 +24,17 @@
             }
 
         }
+        async function enter() {
+            var sql = `insert into Counts (inNumber) values (1);`;
+            var objects = await osql.connect(sql);
+        }
+
+        async function exit() {
+            var sql = `insert into Counts (exNumber) values (1);`;
+            var objects = await osql.connect(sql);
+        }
+
+
         async function calculate() {
             var sql = 'select sum(inNumber) as inNum from Counts';
             var objects = await osql.connect(sql);
@@ -46,7 +57,10 @@
         <h1 id="numbers"></h1>
         <p>「Space」は入場</p>
         <p>「Enter」は退場</p>
+        <button onclick="enter()"></buttn>入場</button>
+        <button onclick="exit()">退場</button>
     </div>
+    <div></div>
 </body>
 
 </html>
