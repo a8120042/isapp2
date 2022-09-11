@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="lib/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/osql.js"></script>
+    <script>
+        addEventListener("keydown", keydownfunc);
+        async function keydownfunc(event) {
+
+            var key_code = event.keyCode;
+
+            if (key_code === 32) {
+                var sql = `insert into Counts (inNumber) values (1);`;
+                var objects = await osql.connect(sql);
+            }
+            if (key_code === 13) {
+                var sql = `insert into Counts (exNumber) values (1);`;
+                var objects = await osql.connect(sql);
+            }
+
+        }
+        async function calculate() {
+            var sql = 'select sum(inNumber) as inNum from Counts';
+            var objects = await osql.connect(sql);
+            var inNumber = objects[0].inNum;
+            var sql = 'select sum(exNumber) as exNum from Counts';
+            var objects = await osql.connect(sql);
+            var exNumber = objects[0].exNum;
+            var now = inNumber - exNumber;
+            document.getElementById("numbers").innerHTML = now + "人";
+        }
+        setInterval(calculate, 2000);
+
+
+    </script>
+</head>
+
+<body>
+    <div style="text-align: center; ">
+        <h2>いま何人？</h2>
+        <h1 id="numbers"></h1>
+        <p>「Space」は入場</p>
+        <p>「Enter」は退場</p>
+    </div>
+</body>
+
+</html>
